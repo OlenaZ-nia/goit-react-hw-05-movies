@@ -3,9 +3,9 @@ import { ToastContainer } from 'react-toastify';
 
 import { Container } from './components/Container/Container';
 import Appbar from "./components/AppBar/AppBar";
-import { HomePage } from "./components/HomePage/HomePage";
-import { MoviesPage } from "./views/MoviesPage";
-import { MovieDetailsPage } from './components/MovieDetailsPage/MovieDetailsPage';
+import { HomePage } from "./pages/HomePage/HomePage";
+import { MoviesPage } from "./pages/MoviesPage/MoviesPage";
+import { MovieDetailsPage } from './pages/MovieDetailsPage/MovieDetailsPage';
 
 function App() {
   return (

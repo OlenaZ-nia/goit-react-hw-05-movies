@@ -8,7 +8,7 @@ import { mapper } from '../../helpers/mapper';
 // import noPoster from '../../images/noPoster.jpg';
 
 
-import { MoviesList } from '../MoviesList/MoviesList';
+import { MoviesList } from '../../components/MoviesList/MoviesList';
 
     
 export const HomePage = () => {
@@ -21,21 +21,19 @@ export const HomePage = () => {
                 toast.error('Not found!');
                 return;
             }
-            setMovies(prevState => [...prevState, ...mapper(data.results)]);
-            // setMovies(data.results);
-            // setTimeout(() => {
-            //     document.querySelector('#movies').scrollIntoView({
-            //         behavior: 'smooth', block: 'end',
-            //     });
-            // }, 2000);
+            // setMovies(prevState => [...prevState, ...mapper(data.results)]);
+            setMovies([...mapper(data.results)]);
+            setTimeout(() => {
+                document.querySelector('#movies').scrollIntoView({
+                    behavior: 'smooth', block: 'center',
+                });
+            }, 1000);
         })
         .catch(error=>console.log(error))
-        // const fetchTrendMovies = () => {
         
-        // }
     }, [])
 
-    const pathParam = '/movies/';
+    const pathParam = '/movies';
 
     return (
         <>

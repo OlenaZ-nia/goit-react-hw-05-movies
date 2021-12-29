@@ -1,13 +1,13 @@
-import { Link, useHistory, useLocation, useRouteMatch } from 'react-router-dom';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 // import PropTypes from 'prop-types';
-import SearchMovies from '../components/SearchMovies/SearchMovies';
-import { ApiSearchMovie } from '../api/themovideodb-api';
-import { mapper } from '../helpers/mapper';
+import SearchMovies from '../../components/SearchMovies/SearchMovies';
+import { ApiSearchMovie } from '../../api/themovideodb-api';
+import { mapper } from '../../helpers/mapper';
 // import noPoster from '../images/noPoster.jpg';
 
-import { MoviesList } from '../components/MoviesList/MoviesList';
+import { MoviesList } from '../../components/MoviesList/MoviesList';
 
     
 export const MoviesPage = () => {
@@ -16,14 +16,14 @@ export const MoviesPage = () => {
     const { url } = useRouteMatch();
 
     const [movies, setMovies] = useState([]);
-    // const [query, setQuery] = useState('');
 
     let searchParams = new URLSearchParams(location.search).get("query") ?? '';
     // console.log(searchParams)
 
     const handleSubmit = (query) => {
-        // setQuery(query);
-        history.push(`/movies/?query=${query}`);
+        setMovies([]);
+
+        history.push({...location, search: `query=${query}`,});
     };
     
     useEffect(() => {
@@ -34,12 +34,12 @@ export const MoviesPage = () => {
                 return;
                 }
                 // setMovies(prevState => [...prevState, ...mapper(data.results)]);
-                setMovies(data.results);
-            //     setTimeout(() => {
-            //     document.querySelector('#movies').scrollIntoView({
-            //         behavior: 'smooth', block: 'end',
-            //     });
-            // }, 2000);
+                setMovies([...mapper(data.results)]);
+                setTimeout(() => {
+                document.querySelector('#movies').scrollIntoView({
+                    behavior: 'smooth', block: 'center',
+                });
+            }, 1000);
             })
                 .catch(error => console.log(error));
         }

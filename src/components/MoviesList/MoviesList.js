@@ -7,7 +7,7 @@ export const MoviesList = ({movies, pathParam}) => {
         <ul className={s.moviesList} id='movies'>
                 {movies.map(({ id, original_title, title, poster_path }) => (
                 <li key={id} className={s.moviesItem}>
-                        <Link to={`${pathParam}${id}`} className={s.link}>
+                        <Link to={`${pathParam}/${id}`} className={s.link}>
                             <img className={s.poster} src={poster_path
                                 ? `https://image.tmdb.org/t/p/w500${poster_path}`
                                 : noPoster} alt={title || original_title} width={320} />
