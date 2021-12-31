@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import s from './HomePage.module.css';
@@ -11,12 +11,15 @@ import { mapper } from '../../helpers/mapper';
 import { MoviesList } from '../../components/MoviesList/MoviesList';
 
     
-export const HomePage = () => {
+export default function HomePage () {
     const [movies, setMovies] = useState([]);
+
+    const location = useLocation();
+    // const { url } = useRouteMatch();
     
     useEffect(() => {
         ApiTrendMovie().then(data => {
-            console.log(data);
+            // console.log(data);
             if (data.total_pages === 0) {
                 toast.error('Not found!');
                 return;
@@ -41,7 +44,7 @@ export const HomePage = () => {
             {/* {movies && (<ul className={s.moviesList} id='movies'>
                 {movies.map(({ id, original_title, title, poster_path }) => (
                 <li key={id} className={s.moviesItem}>
-                        <Link to={`/movies/${id}`} className={s.link}>
+                        <Link to={{pathname: `/movies/${id}`, state: {from: {location}},}} className={s.link}>
                             <img src={poster_path
                                 ? `https://image.tmdb.org/t/p/w500${poster_path}`
                                 : noPoster} alt={title || original_title} width={320} />
@@ -51,22 +54,14 @@ export const HomePage = () => {
             )}
             </ul>)} */}
 
-
-
-            {movies && <MoviesList movies={movies} pathParam={pathParam}/>}
+            {movies && <MoviesList movies={movies} pathParam={pathParam} location={location}/>}
         </>
 
     )
 }
 
-// HomePage.propTypes = {
-//      images: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             id: PropTypes.number.isRequired,
-//             webformatURL: PropTypes.string.isRequired,
-//             largeImageURL: PropTypes.string.isRequired,
-//             tags: PropTypes.string.isRequired,
-//         }).isRequired,
-//     ),
-//     onClickImg: PropTypes.func.isRequired,
-//  }
+
+
+
+
+

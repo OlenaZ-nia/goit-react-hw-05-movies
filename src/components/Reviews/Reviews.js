@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import PropTypes from 'prop-types';
 import s from './Reviews.module.css';
 import { ApiMovieReview } from '../../api/themovideodb-api';
 
 
-export const Reviews = () => {
-    const { movieId } = useParams();
+export default function Reviews ({movieId}) {
+    // const { movieId } = useParams();
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
@@ -41,4 +42,8 @@ export const Reviews = () => {
             }
         </>
     )
+}
+
+Reviews.propTypes = {
+   movieId: PropTypes.string.isRequired,
 }

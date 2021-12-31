@@ -43,6 +43,9 @@
 
 .link {
   display: inline-block;
+  padding: 5px 10px 5px 10px;
+  border-radius: 50px;
+  width: 60px;
   text-decoration: none;
   color: #3f51b5;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -54,4 +57,6 @@
 
 .link:hover {
   transform: scale(1.03);
+
+  background-color: rgba(0, 0, 0, 0.2);
 }

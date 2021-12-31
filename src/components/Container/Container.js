@@ -1,5 +1,5 @@
 import s from './Container.module.css';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 export const Container = ({children}) => {
     return (
@@ -9,6 +9,6 @@ export const Container = ({children}) => {
     )
 }
 
-// Container.propTypes = {
-//    children: PropTypes.node.isRequired,
-// }
+Container.propTypes = {
+   children: PropTypes.node.isRequired,
+}

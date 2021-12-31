@@ -5,12 +5,11 @@ import { toast } from 'react-toastify';
 import SearchMovies from '../../components/SearchMovies/SearchMovies';
 import { ApiSearchMovie } from '../../api/themovideodb-api';
 import { mapper } from '../../helpers/mapper';
-// import noPoster from '../images/noPoster.jpg';
+// import noPoster from '../../images/noPoster.jpg';
 
 import { MoviesList } from '../../components/MoviesList/MoviesList';
-
     
-export const MoviesPage = () => {
+export default function MoviesPage () {
     const history = useHistory();
     const location = useLocation();
     const { url } = useRouteMatch();
@@ -46,7 +45,6 @@ export const MoviesPage = () => {
         
     }, [searchParams]);
 
-    const pathParam = url;
 
     return (
         <>
@@ -54,34 +52,20 @@ export const MoviesPage = () => {
             {/* {movies && (<ul id='movies'>
                 {movies.map(({ id, original_title, title,poster_path }) => (
                 <li key={id}>
-                    <Link to={`${url}${id}`}>
+                    <Link to={{pathname: `${url}/${id}`, state: {from: {location}},}}>
                         <img src={poster_path
                                 ? `https://image.tmdb.org/t/p/w500${poster_path}`
                                 : noPoster} alt={title || original_title} width={320} />
                             <p className={ s.movieTitle}>{ title || original_title}</p>
                     </Link>
 
-                    <Link to={`/movies/${id}`}>
-                        { original_title || title}
-                    </Link>
                 </li>)
             )}
             </ul>)} */}
 
-            {movies.length !==0 && <MoviesList movies={movies} pathParam={pathParam}/>}
+            {movies.length !==0 && <MoviesList movies={movies} pathParam={url} location={location}/>}
         </>
 
     )
 }
 
-// MoviesPage.propTypes = {
-//      images: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             id: PropTypes.number.isRequired,
-//             webformatURL: PropTypes.string.isRequired,
-//             largeImageURL: PropTypes.string.isRequired,
-//             tags: PropTypes.string.isRequired,
-//         }).isRequired,
-//     ),
-//     onClickImg: PropTypes.func.isRequired,
-//  }

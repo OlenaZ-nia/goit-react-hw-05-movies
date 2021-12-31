@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from './SearchMovies.module.css';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 
 export default function SearchMovies({onSubmit}) {
@@ -41,6 +41,6 @@ export default function SearchMovies({onSubmit}) {
     )
 }
 
-// Searchbar.propTypes = {
-//     onSubmit: PropTypes.func.isRequired,
-//   };
+SearchMovies.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };

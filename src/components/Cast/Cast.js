@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
+import PropTypes from 'prop-types';
 import s from './Cast.module.css';
 import { ApiMovieCast } from "../../api/themovideodb-api";
 import noAvatar from '../../images/noAvatar.jpg';
 
 
-export const Cast = () => {
-    const { movieId } = useParams();
+export default function Cast ({movieId}) {
+    // const { movieId } = useParams();
 
     const [cast, setCast] = useState(null);
 
     useEffect(() => {
         ApiMovieCast(movieId).then(data => {
             console.log(data)
+            // if (data.cast.length === 0) {
+            //     throw new Error('no cast');
+            // }
             setCast(data.cast);
             setTimeout(() => {
                 document.querySelector('#cast').scrollIntoView({
@@ -44,4 +48,8 @@ export const Cast = () => {
         </>
     )
 
+}
+
+Cast.propTypes = {
+   movieId: PropTypes.string.isRequired,
 }
