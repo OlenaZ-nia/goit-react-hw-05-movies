@@ -11,15 +11,15 @@ export default function Reviews ({movieId}) {
 
     useEffect(() => {
         ApiMovieReview(movieId).then(data => {
-            console.log(data)
+            // console.log(data)
             setReviews(data.results);
-            if (data.results.length > 0) {
-                setTimeout(() => {
+            
+            setTimeout(() => {
                 document.querySelector('#reviews').scrollIntoView({
                     behavior: 'smooth', block: 'nearest',
                 });
             }, 1000);
-            }
+        
         })
             .catch(error => console.log(error))
     }, [movieId])
@@ -38,7 +38,7 @@ export default function Reviews ({movieId}) {
                 </li>
             ))}
                 </ul>
-            ) : (<p>We don't have any reviews for this movie</p>)
+            ) : (<p id='reviews'>We don't have any reviews for this movie</p>)
             }
         </>
     )

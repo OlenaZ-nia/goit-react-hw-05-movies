@@ -3,3 +3,6 @@ export const selectData = ({ original_title, title, poster_path, release_date, v
     return Object.assign({}, { original_title, title, poster_path, release_date, vote_average, overview, genres });
 }
 
+
+
+

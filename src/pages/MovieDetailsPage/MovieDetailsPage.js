@@ -24,8 +24,7 @@ export default function MovieDetailsPage () {
         ApiMovieDetails(movieId).then(data => {
             data.release_date = data.release_date.slice(0, 4);
             // data.release_date = data.release_date.substring(0, 4);
-            
-            // setMovie(data);
+
             setMovie(selectData(data));
     })
         .catch(error => console.log(error))
@@ -47,7 +46,7 @@ export default function MovieDetailsPage () {
                     <img className={s.poster} src={movie.poster_path 
                     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                     : noPoster} alt={movie.title || movie.original_title} width={320} height={480} />
-                <h2>{movie.title || movie.original_title} ({movie.release_date})</h2>
+                <h2>{movie.title || movie.original_title} {movie.release_date !=='' ? <span>({movie.release_date})</span> : ''}</h2>
                 <p>User Score: {movie.vote_average*10}%</p>
                 <h3>Overview</h3>
                 <p>{movie.overview}</p>

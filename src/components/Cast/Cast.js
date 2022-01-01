@@ -9,15 +9,19 @@ import noAvatar from '../../images/noAvatar.jpg';
 export default function Cast ({movieId}) {
     // const { movieId } = useParams();
 
-    const [cast, setCast] = useState(null);
+    const [cast, setCast] = useState([]);
 
     useEffect(() => {
         ApiMovieCast(movieId).then(data => {
-            console.log(data)
+            // const uniqueId = data.cast.filter((set => f => !set.has(f.id) && set.add(f.id))(new Set()));
+            // console.log(uniqueId);
+
             // if (data.cast.length === 0) {
-            //     throw new Error('no cast');
+            //     throw new Error('No cast');
             // }
-            setCast(data.cast);
+
+            setCast([...mapper(data.cast)]);
+            
             setTimeout(() => {
                 document.querySelector('#cast').scrollIntoView({
                     behavior: 'smooth', block: 'nearest',
@@ -27,13 +31,18 @@ export default function Cast ({movieId}) {
             .catch(error => console.log(error))
     }, [movieId])
 
+    const mapper = (data) => {
+        return data.map(({ cast_id, profile_path, name, original_name, character }) => (
+            { cast_id, profile_path, name, original_name, character }
+        ))
+    }
 
     return (
         <>
-            {cast && (
+            {cast.length > 0 ? (
                 <ul className={s.actorList} id='cast'>
-            {cast.map(({id, profile_path, name, original_name, character }) => (
-                <li key={id} className={s.actorListItem}>
+                    {cast.map(({ cast_id, profile_path, name, original_name, character }) => (
+                <li key={cast_id} className={s.actorListItem}>
                     <img className={s.avatar}
                         src={profile_path
                         ? `https://image.tmdb.org/t/p/w300/${profile_path}`
@@ -44,7 +53,8 @@ export default function Cast ({movieId}) {
                 </li>
             ))}
         </ul>
-        )}
+            )
+    : <p id='cast'>No cast</p>}
         </>
     )
 
